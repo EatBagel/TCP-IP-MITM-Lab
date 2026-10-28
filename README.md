@@ -19,7 +19,8 @@ The lab uses three VMs connected to the same isolated VMware virtual network.
 **VMware network:** Host-only (use the actual VMnet name/number configured on your computer)  
 **Default gateway:** Not required for communication within this subnet.
 
-> Verify these addresses and MAC addresses against your VMs before submitting. The client/server MAC addresses above came from the lab details supplied for this project.
+<img width="1916" height="1018" alt="Screenshot 2026-10-27 161639" src="https://github.com/user-attachments/assets/0cdfff6e-eae6-4d39-95ae-57e870739ddf" />
+
 
 ## 2. Objective
 
@@ -155,6 +156,9 @@ finally:
     queue.unbind()
 ```
 
+<img width="1916" height="1018" alt="Screenshot 2026-10-27 161639" src="https://github.com/user-attachments/assets/1081b262-6da3-4f05-ad23-76ff4ee70777" />
+
+
 Save the file in nano:
 
 1. Press `Ctrl+O`.
@@ -219,6 +223,9 @@ If the selected packets traverse Kali and reach the queue, the program should pr
 Modified 192.168.50.10 -> 192.168.50.20: TTL 63 -> 42
 ```
 
+<img width="1917" height="1022" alt="Screenshot 2026-10-27 170127" src="https://github.com/user-attachments/assets/326911d2-2988-416f-ba78-bdbabd087d17" />
+
+
 The old TTL shown may vary depending on the packet's path and where the queue observes it. The important evidence is that the code logs the original value and sets the outgoing value to `42`.
 
 If no modification messages appear, do not assume the program succeeded. Check whether the `iptables` rule counter increases, and verify that the client-to-server traffic is actually traversing Kali.
@@ -243,6 +250,9 @@ Inspect the server's capture for an incoming request that displays:
 ```text
 ttl 42
 ```
+
+<img width="1917" height="1023" alt="Screenshot 2026-10-27 170407" src="https://github.com/user-attachments/assets/7a94214c-6604-4672-aae7-bd1aa3653b1c" />
+
 
 If the server receives a packet with TTL `42`, and the Python program logs changing that packet's TTL to `42`, this is evidence of the IPv4 header modification.
 
@@ -269,20 +279,16 @@ Fill in this table after running the experiment.
 
 | Measurement | Observed result |
 |---|---|
-| Baseline TTL | `[Enter observed value]` |
+| Baseline TTL | `64` |
 | TTL set by the program | `42` |
-| TTL observed at server | `[Enter observed value]` |
-| Did the program log modified packets? | `[Yes/No]` |
-| Did the server receive TTL 42? | `[Yes/No]` |
-| Did ping succeed during the test? | `[Yes/No]` |
+| TTL observed at server | `42` |
+| Did the program log modified packets? | `Yes` |
+| Did the server receive TTL 42? | `Yes` |
+| Did ping succeed during the test? | `Yes` |
 
 ## 12. Explanation for the Report
 
-Customize this paragraph to match your verified results:
-
-> I implemented a Python packet-processing program using Scapy and NetfilterQueue. The program inspected forwarded ICMP echo requests from the client (`192.168.50.10`) to the server (`192.168.50.20`). For matching packets, it changed the IPv4 Time to Live (TTL) field to `42`, recalculated the IPv4 header checksum, and allowed the modified packet to continue to its destination. I checked the program's output and captured incoming ICMP requests on the server to verify the result. The observed original TTL was **[enter value]**, and the TTL recorded at the server was **[enter value]**. The ping test **[succeeded/failed]**.
-
-Only state that the modification succeeded if the program output and packet capture support that conclusion.
+> I implemented a Python packet-processing program using Scapy and NetfilterQueue. The program inspected forwarded ICMP echo requests from the client (`192.168.50.10`) to the server (`192.168.50.20`). For matching packets, it changed the IPv4 Time to Live (TTL) field to `42`, recalculated the IPv4 header checksum, and allowed the modified packet to continue to its destination. I checked the program's output and captured incoming ICMP requests on the server to verify the result. The observed original TTL was **64**, and the TTL recorded at the server was **42**. The ping test **successful**.
 
 ## 13. Clean Up
 
