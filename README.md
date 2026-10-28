@@ -19,7 +19,9 @@ The lab uses three VMs connected to the same isolated VMware virtual network.
 **VMware network:** Host-only (use the actual VMnet name/number configured on your computer)  
 **Default gateway:** Not required for communication within this subnet.
 
-<img width="1916" height="1018" alt="Screenshot 2026-10-27 161639" src="https://github.com/user-attachments/assets/0cdfff6e-eae6-4d39-95ae-57e870739ddf" />
+<img width="1917" height="1023" alt="Screenshot 2026-10-27 024031" src="https://github.com/user-attachments/assets/4e326c7f-4ebb-4339-a0c1-2a0d86523410" />
+
+<img width="1917" height="1026" alt="Screenshot 2026-10-27 023930" src="https://github.com/user-attachments/assets/75f11ccc-6297-4293-8a80-19f3a2f4c2fa" />
 
 
 ## 2. Objective
